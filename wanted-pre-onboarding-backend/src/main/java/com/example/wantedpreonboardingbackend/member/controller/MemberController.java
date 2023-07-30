@@ -35,6 +35,8 @@ public class MemberController {
 //    RequestBody 안에있는 Member을 가져온다.
             Member member
     ){
+
+
         System.out.println(member);
         ResponseDTO<MemberDTO> responseDTO = new ResponseDTO<>();
         try {
