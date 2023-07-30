@@ -5,11 +5,13 @@ import com.example.wantedpreonboardingbackend.jwt.JwtTokenProvider;
 import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
 import com.example.wantedpreonboardingbackend.member.entity.Member;
 import com.example.wantedpreonboardingbackend.member.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,26 +35,29 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity<?> join(
 //    RequestBody 안에있는 Member을 가져온다.
-            Member member
-    ){
+            @Valid MemberDTO member , BindingResult bindingResult
+            ){
 
+
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getAllErrors());
+        }
 
         System.out.println(member);
         ResponseDTO<MemberDTO> responseDTO = new ResponseDTO<>();
         try {
-
 //            비밀번호 암호화
             member.setPassword(passwordEncoder.encode(member.getPassword()));
             System.out.println(member.getPassword());
 //            회원가입(MemberEntity 리턴하도록)
-            memberService.join(member);
+           MemberDTO returnMember = memberService.join(member);
             System.out.println(member);
 //            DTO로 변환(비밀번호는 "")
-            MemberDTO memberDTO =  member.toMemberDTO();
-            System.out.println(memberDTO);
+//            MemberDTO memberDTO =  member.toMemberDTO();
+//            System.out.println(memberDTO);
             responseDTO.setStatusCode(HttpStatus.OK.value());
 //            ResponsEntity에 DTO 담아서 전송
-            return  ResponseEntity.ok().body(memberDTO);
+            return  ResponseEntity.ok().body(returnMember);
         }
         catch (Exception exception){
             responseDTO.setErrorMessage(exception.getMessage());
@@ -62,12 +67,14 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login( Member member){
+    public ResponseEntity<?> login( MemberDTO member){
         ResponseDTO<MemberDTO> response = new ResponseDTO<>();
+        Member loginmember =  member.toMemberEntity();
         try {
+
 //            로그인 처리
 //            로그인 시 로그인 한 Member 엔티티 리턴
-            Optional<Member> loginUser = memberService.login(member);
+            Optional<Member> loginUser = memberService.login(loginmember);
             System.out.println("controller"+loginUser);
 //            위에서 받아온 엔티티가  null이 아닐때
             if(!loginUser.isEmpty()){

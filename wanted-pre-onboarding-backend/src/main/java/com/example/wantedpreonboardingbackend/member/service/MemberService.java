@@ -1,10 +1,13 @@
 package com.example.wantedpreonboardingbackend.member.service;
 
+import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
 import com.example.wantedpreonboardingbackend.member.entity.Member;
 import com.example.wantedpreonboardingbackend.member.reposiitory.MemberRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.Optional;
 
@@ -16,17 +19,18 @@ public class MemberService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public Member join(Member member) {
+    public MemberDTO join(MemberDTO member ) {
         if(member == null || member.getUsername() ==null){
             throw new RuntimeException("Invalid Argument");
         }
+       Member joinmember = member.toMemberEntity();
 
         //username 중복체크
         if(memberRepository.existsByUsername(member.getUsername())){
 
             throw new RuntimeException("already exist username");
         }
-        return memberRepository.save(member);
+        return memberRepository.save(joinmember).toMemberDTO();
     }
 
     public Optional<Member> login(Member member) {

@@ -1,6 +1,9 @@
 package com.example.wantedpreonboardingbackend.member.dto;
 
 import com.example.wantedpreonboardingbackend.member.entity.Member;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +16,11 @@ import lombok.NoArgsConstructor;
 public class MemberDTO {
     private Long id;
 
+    @Email(message = "이메일 형식으로 입력하세요")
+//    @Pattern()
     private String username;
 
+    @Size(min = 8,message = "8자 이상입력하세요.")
     private String password;
 
     private String role;
