@@ -59,10 +59,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 //           유효성 검사 완료된 토큰 시큐리티에 인증된 사용자로 등록
                 AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        username,null,null);
+                        userDetails,null,userDetails.getAuthorities());
 
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContext securityContext = SecurityContextHolder.getContext();
+                securityContext.setAuthentication(authenticationToken);
                 SecurityContextHolder.setContext(securityContext);
 
 

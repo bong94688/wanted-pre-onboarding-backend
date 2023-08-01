@@ -1,21 +1,24 @@
 package com.example.wantedpreonboardingbackend.board.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.wantedpreonboardingbackend.member.entity.Member;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 public class Board {
 
     @Id
+    @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private String username;
+
+    @JoinColumn(name = "MEMBER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
 
     private String text;
 

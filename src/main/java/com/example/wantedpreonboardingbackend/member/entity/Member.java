@@ -1,8 +1,11 @@
 package com.example.wantedpreonboardingbackend.member.entity;
 
+import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +29,7 @@ public class Member {
             strategy = GenerationType.SEQUENCE,
             generator = "MemberSeqGenerator"
     )
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(nullable = false)
@@ -34,6 +38,8 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+//    @OneToMany(mappedBy = "board")
+//    private List<Board> board;
 
     private String role;
 
