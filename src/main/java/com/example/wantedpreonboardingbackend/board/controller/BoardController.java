@@ -5,9 +5,12 @@ import com.example.wantedpreonboardingbackend.board.dto.BoardDto;
 import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.board.service.BoardService;
 import com.example.wantedpreonboardingbackend.dto.ResponseDTO;
+import com.example.wantedpreonboardingbackend.member.entity.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,8 +21,12 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
 
+
     @GetMapping("/board")
-    public ResponseEntity<?> getTodoList(@RequestBody BoardDto boardDto) {
+    public ResponseEntity<?> getTodoList(@Param(value = "BoardDto") BoardDto boardDto//security에 있는 authentication에 접근
+            , @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        System.out.println(customUserDetails);
 
         ResponseDTO<BoardDto> response = new ResponseDTO<>();
         try {
@@ -39,8 +46,10 @@ public class BoardController {
 
 
     @PostMapping("/board")
-    public ResponseEntity<?> insertTodoList(@RequestBody BoardDto boardDto) {
+    public ResponseEntity<?> insertTodoList(@RequestBody BoardDto boardDto
+    ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
+        System.out.println(customUserDetails);
         ResponseDTO<Integer> response = new ResponseDTO<>();
 
 
@@ -59,7 +68,9 @@ public class BoardController {
     }
 
     @PutMapping("/board")
-    public ResponseEntity<?> updateTodoList(@RequestBody BoardDto boardDto) {
+    public ResponseEntity<?> updateTodoList(@RequestBody BoardDto boardDto,
+    @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println(customUserDetails);
 
         ResponseDTO<BoardDto> response = new ResponseDTO<>();
         try {
@@ -78,7 +89,10 @@ public class BoardController {
 }
 
         @DeleteMapping("/board")
-        public ResponseEntity<?> deleteboard(@RequestBody int boardnumber) {
+        public ResponseEntity<?> deleteboard(@RequestBody int boardnumber,
+                                             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+            System.out.println(customUserDetails);
+
             ResponseDTO<BoardDto> response = new ResponseDTO<>();
 
             try {
