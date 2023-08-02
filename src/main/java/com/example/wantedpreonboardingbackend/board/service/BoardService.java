@@ -3,6 +3,8 @@ package com.example.wantedpreonboardingbackend.board.service;
 import com.example.wantedpreonboardingbackend.board.dto.BoardDto;
 import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.board.repository.BoardRepository;
+import com.example.wantedpreonboardingbackend.member.entity.Member;
+import com.example.wantedpreonboardingbackend.member.reposiitory.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import nonapi.io.github.classgraph.utils.LogNode;
@@ -20,6 +22,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    private final MemberRepository memberRepository;
     public List<BoardDto> getboardlist(){
 
         List<Board> boardList = boardRepository.findAll();
@@ -36,8 +39,10 @@ public class BoardService {
 
     public int saveboard(BoardDto boardDto){
 
-        Board board = boardDto.creatBoard();
+       Member member =  memberRepository.findByUsername(boardDto.getUsername()).orElseThrow(EntityNotFoundException::new);
 
+        Board board = boardDto.creatBoard();
+        board.setMember(member);
       Board saveboBoard = boardRepository.save(board);
 
 

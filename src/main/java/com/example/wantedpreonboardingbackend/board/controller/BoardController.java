@@ -22,9 +22,33 @@ public class BoardController {
     private final BoardService boardService;
 
 
+
+    @GetMapping("/board/{boardid}")
+    public ResponseEntity<?> searchList(//security에 있는 authentication에 접근
+                                 @PathVariable int boardid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+        System.out.println(boardid);
+        System.out.println(customUserDetails);
+
+        ResponseDTO<BoardDto> response = new ResponseDTO<>();
+        try {
+            List<BoardDto> boardDtoList = boardService.getboardlist();
+            response.setItems(boardDtoList);
+
+            response.setStatusCode(HttpStatus.OK.value());
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            response.setErrorMessage(e.getMessage());
+            response.setStatusCode(HttpStatus.BAD_REQUEST.value());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+
     @GetMapping("/board")
-    public ResponseEntity<?> getTodoList(@Param(value = "BoardDto") BoardDto boardDto//security에 있는 authentication에 접근
-            , @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public ResponseEntity<?> getTodoList(//security에 있는 authentication에 접근
+             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         System.out.println(customUserDetails);
 
@@ -50,16 +74,13 @@ public class BoardController {
     ,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
 
         System.out.println(customUserDetails);
+        boardDto.setUsername(customUserDetails.getUsername());
         ResponseDTO<Integer> response = new ResponseDTO<>();
-
-
         try {
 //            새로운 Todo저장
             int updateboardnum = boardService.saveboard(boardDto);
-
             response.setItem(updateboardnum);
             return ResponseEntity.ok().body(response);
-
         } catch (Exception e) {
             response.setErrorMessage(e.getMessage());
             response.setStatusCode(HttpStatus.BAD_REQUEST.value());

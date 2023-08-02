@@ -97,4 +97,5 @@ class BoardServiceTest {
         boardRepository.delete(updateboard.get());
         System.out.println(boardRepository.findAll());
     }
+
 }
