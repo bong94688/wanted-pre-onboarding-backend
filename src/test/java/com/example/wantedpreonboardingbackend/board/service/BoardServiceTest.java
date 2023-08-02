@@ -79,6 +79,7 @@ class BoardServiceTest {
 //        board = boardRepository.save(board);  // 이 줄을 추가합니다.
         System.out.println(boardRepository.findByMember(board.getMember()));
         assertEquals(boardRepository.findByMember(board.getMember()).get(), board);
+        //false -> 오류떠요
     }
 
 
@@ -97,5 +98,4 @@ class BoardServiceTest {
         boardRepository.delete(updateboard.get());
         System.out.println(boardRepository.findAll());
     }
-
 }

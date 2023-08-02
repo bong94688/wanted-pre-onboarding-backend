@@ -7,6 +7,9 @@ import com.example.wantedpreonboardingbackend.board.service.BoardService;
 import com.example.wantedpreonboardingbackend.dto.ResponseDTO;
 import com.example.wantedpreonboardingbackend.member.entity.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,17 +27,20 @@ public class BoardController {
 
 
 
-    @GetMapping("/board/{boardid}")
+    @GetMapping("/board/search/{boardid}")
     public ResponseEntity<?> searchList(//security에 있는 authentication에 접근
                                  @PathVariable int boardid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-
         System.out.println(boardid);
         System.out.println(customUserDetails);
 
         ResponseDTO<BoardDto> response = new ResponseDTO<>();
         try {
-            List<BoardDto> boardDtoList = boardService.getboardlist();
-            response.setItems(boardDtoList);
+            BoardDto searchboard = boardService.searchboard(boardid);
+
+
+
+
+            response.setItem(searchboard);
 
             response.setStatusCode(HttpStatus.OK.value());
             return ResponseEntity.ok().body(response);
@@ -46,19 +53,19 @@ public class BoardController {
 
 
 
-    @GetMapping("/board")
+    @GetMapping({"/board","/board/{page}"})
     public ResponseEntity<?> getTodoList(//security에 있는 authentication에 접근
-             @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-
+             @AuthenticationPrincipal CustomUserDetails customUserDetails,@RequestParam(value = "page", required = false) Integer page) {
+        System.out.println(page);
         System.out.println(customUserDetails);
 
         ResponseDTO<BoardDto> response = new ResponseDTO<>();
         try {
+            Pageable pageable = PageRequest.of(page!=null?page : 0,5);
 
-
-            List<BoardDto> boardDtoList = boardService.getboardlist();
-            response.setItems(boardDtoList);
-
+            Page<BoardDto> boards = boardService.pageboardList(pageable);
+//            List<BoardDto> boardDtoList = boardService.getboardlist();
+            response.setItems(boards);
             response.setStatusCode(HttpStatus.OK.value());
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -96,10 +103,10 @@ public class BoardController {
         ResponseDTO<BoardDto> response = new ResponseDTO<>();
         try {
 
-            BoardDto updateboard = boardService.updateTodo(boardDto);
+            BoardDto updateboard = boardService.updateTodo(boardDto,customUserDetails);
 
 
-            response.setItem(boardDto);
+            response.setItem(updateboard);
             response.setStatusCode(HttpStatus.OK.value());
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {
@@ -110,15 +117,15 @@ public class BoardController {
 }
 
         @DeleteMapping("/board")
-        public ResponseEntity<?> deleteboard(@RequestBody int boardnumber,
+        public ResponseEntity<?> deleteboard(@RequestBody BoardDto boardDto,
                                              @AuthenticationPrincipal CustomUserDetails customUserDetails) {
             System.out.println(customUserDetails);
 
             ResponseDTO<BoardDto> response = new ResponseDTO<>();
 
             try {
-               BoardDto boardDto =  boardService.deleteboard(boardnumber);
-                response.setItem(boardDto);
+               BoardDto delteboard =  boardService.deleteboard(boardDto.getId(),customUserDetails);
+                response.setItem(delteboard);
                 response.setStatusCode(HttpStatus.OK.value());
                 return ResponseEntity.ok().body(response);
             } catch (Exception e) {
