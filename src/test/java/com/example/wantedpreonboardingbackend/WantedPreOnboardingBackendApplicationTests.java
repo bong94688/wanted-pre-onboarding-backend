@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.example.wantedpreonboardingbackend;
 
 import com.example.wantedpreonboardingbackend.board.entity.Board;
@@ -44,6 +45,18 @@ class WantedPreOnboardingBackendApplicationTests {
         assertThat(memberJPAQuery.getId()).isEqualTo(test.getId());
 //        assertThat(memberJPAQuery.getId()).isEqualTo(test.getId());
 
+=======
+package com.example.bitcamptiger;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class BitcamptigerApplicationTests {
+
+    @Test
+    void contextLoads() {
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
     }
 
 }

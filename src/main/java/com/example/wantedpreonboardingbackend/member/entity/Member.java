@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.example.wantedpreonboardingbackend.member.entity;
 
 import com.example.wantedpreonboardingbackend.board.entity.Board;
@@ -7,6 +8,18 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+=======
+package com.example.bitcamptiger.member.entity;
+
+<<<<<<<< HEAD:bitcamptiger/src/main/java/com/example/bitcamptiger/member/entity/Member.java
+import com.example.bitcamptiger.member.dto.MemberDTO;
+========
+import com.example.wantedpreonboardingbackend.board.entity.Board;
+import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
+>>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/member/entity/Member.java
+import jakarta.persistence.*;
+import lombok.*;
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 
 import java.util.List;
 
@@ -41,6 +54,7 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+<<<<<<< HEAD
 <<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/member/entity/Member.java
     private String userEmail;
 =======
@@ -55,6 +69,11 @@ public class Member {
 
     @Column
     @ColumnDefault("'ROLE_USER'")
+=======
+//    @OneToMany(mappedBy = "board")
+//    private List<Board> board;
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
     private String role;
 
     public MemberDTO toMemberDTO() {

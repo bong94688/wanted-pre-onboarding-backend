@@ -1,8 +1,15 @@
 package com.example.bitcamptiger.member.entity;
 
+<<<<<<<< HEAD:bitcamptiger/src/main/java/com/example/bitcamptiger/member/entity/Member.java
 import com.example.bitcamptiger.member.dto.MemberDTO;
+========
+import com.example.wantedpreonboardingbackend.board.entity.Board;
+import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
+>>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/member/entity/Member.java
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +33,7 @@ public class Member {
             strategy = GenerationType.SEQUENCE,
             generator = "MemberSeqGenerator"
     )
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(nullable = false)
@@ -34,6 +42,8 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+//    @OneToMany(mappedBy = "board")
+//    private List<Board> board;
 
     private String role;
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.example.wantedpreonboardingbackend.jwt;
+=======
+package com.example.bitcamptiger.jwt;
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 
 
 import com.example.wantedpreonboardingbackend.member.service.Impl.UserDetailsServiceImpl;
@@ -10,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+<<<<<<< HEAD
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +23,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 =======
 >>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
+=======
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -34,6 +44,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+<<<<<<< HEAD
 <<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
     private final UserDetailsService userDetailsServiceImpl;
 
@@ -44,13 +55,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //        this.jwtTokenProvider = jwtTokenProvider;
 //    }
 =======
+=======
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     private final JwtTokenProvider jwtTokenProvider;
 
 
+<<<<<<< HEAD
 >>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
+=======
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 
     //   filter로 등록하면 자동으로 실행될 메소드
 
@@ -63,12 +79,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //       request에서 token꺼내오기
 //        token 값이 있으면 토큰값이 담기고 토큰 값이 없으면 null이 담긴다.
             String token = parseBearerToken(request);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 //       토큰 검사 및 시큐리티 등록
             if(token != null && !token.equalsIgnoreCase("null")){
 //           유효성 검사 및 username가져오기
                 String username = jwtTokenProvider.validateAndGetUsername(token);
+<<<<<<< HEAD
 <<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 =======
+=======
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
 
 //
                 UserDetails userDetails =
@@ -77,6 +100,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //           유효성 검사 완료된 토큰 시큐리티에 인증된 사용자로 등록
                 AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails,null,userDetails.getAuthorities());
+<<<<<<< HEAD
 >>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 
                 UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
@@ -85,16 +109,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails,null, userDetails.getAuthorities());
+=======
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContext securityContext = SecurityContextHolder.getContext();
                 securityContext.setAuthentication(authenticationToken);
                 SecurityContextHolder.setContext(securityContext);
 
+<<<<<<< HEAD
 <<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 =======
 
 
 >>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
+=======
+
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00
             }
         }catch (Exception e){
             System.out.println("Set security context error:"+ e.getMessage());
