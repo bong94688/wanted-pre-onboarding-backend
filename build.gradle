@@ -27,6 +27,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -55,8 +58,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
     implementation 'org.modelmapper:modelmapper:3.1.1'
 
+<<<<<<< HEAD:wanted-pre-onboarding-backend/build.gradle
 //   바인딩게 됨
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
+=======
+//    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+//    implementation 'org.springframework.boot:spring-boot-starter-log4j2:3.1.2'
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00:build.gradle
 
 }
 

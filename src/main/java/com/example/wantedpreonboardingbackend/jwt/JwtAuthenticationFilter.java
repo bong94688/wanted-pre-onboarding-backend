@@ -1,6 +1,7 @@
 package com.example.wantedpreonboardingbackend.jwt;
 
 
+import com.example.wantedpreonboardingbackend.member.service.Impl.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +14,10 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+<<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 import org.springframework.security.core.userdetails.UserDetailsService;
+=======
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -30,6 +34,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+<<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
     private final UserDetailsService userDetailsServiceImpl;
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -38,11 +43,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider){
 //        this.jwtTokenProvider = jwtTokenProvider;
 //    }
+=======
+
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 
     //   filter로 등록하면 자동으로 실행될 메소드
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
 
         try {
 
@@ -53,6 +67,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if(token != null && !token.equalsIgnoreCase("null")){
 //           유효성 검사 및 username가져오기
                 String username = jwtTokenProvider.validateAndGetUsername(token);
+<<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
+=======
+
+//
+                UserDetails userDetails =
+                        userDetailsServiceImpl.loadUserByUsername(username);
+
+//           유효성 검사 완료된 토큰 시큐리티에 인증된 사용자로 등록
+                AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails,null,userDetails.getAuthorities());
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
 
                 UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
 //           유효성 검사 완료된 토큰 시큐리티에 인증된 사용자로 등록
@@ -65,6 +90,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 securityContext.setAuthentication(authenticationToken);
                 SecurityContextHolder.setContext(securityContext);
 
+<<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
+=======
+
+
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/jwt/JwtAuthenticationFilter.java
             }
         }catch (Exception e){
             System.out.println("Set security context error:"+ e.getMessage());

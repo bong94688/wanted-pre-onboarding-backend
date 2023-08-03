@@ -1,11 +1,14 @@
 package com.example.wantedpreonboardingbackend.member.entity;
 
+import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +32,7 @@ public class Member {
             strategy = GenerationType.SEQUENCE,
             generator = "MemberSeqGenerator"
     )
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(nullable = false)
@@ -37,7 +41,12 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+<<<<<<< HEAD:wanted-pre-onboarding-backend/src/main/java/com/example/wantedpreonboardingbackend/member/entity/Member.java
     private String userEmail;
+=======
+//    @OneToMany(mappedBy = "board")
+//    private List<Board> board;
+>>>>>>> 365d2d9dcc418522926789802695e8665737de00:src/main/java/com/example/wantedpreonboardingbackend/member/entity/Member.java
 
     private String userTel;
 
