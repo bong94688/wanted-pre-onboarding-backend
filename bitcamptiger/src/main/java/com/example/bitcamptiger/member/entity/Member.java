@@ -1,11 +1,8 @@
-package com.example.wantedpreonboardingbackend.member.entity;
+package com.example.bitcamptiger.member.entity;
 
-import com.example.wantedpreonboardingbackend.member.dto.MemberDTO;
+import com.example.bitcamptiger.member.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -37,15 +34,7 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
-    private String userEmail;
 
-    private String userTel;
-
-    @Column(name = "create_date")
-    private LocalDateTime userRegdate = LocalDateTime.now();
-
-    @Column
-    @ColumnDefault("'ROLE_USER'")
     private String role;
 
     public MemberDTO toMemberDTO() {

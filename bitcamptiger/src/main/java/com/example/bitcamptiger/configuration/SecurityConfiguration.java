@@ -1,6 +1,6 @@
-package com.example.wantedpreonboardingbackend.configuration;
+package com.example.bitcamptiger.configuration;
 
-import com.example.wantedpreonboardingbackend.jwt.JwtAuthenticationFilter;
+import com.example.bitcamptiger.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +42,6 @@ public class SecurityConfiguration {
 
 
         return http
-                .cors(httpSecurityCorsConfigurer -> { })
 //              csrf 공격에 대한 옵션 꺼두기
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(httpSecurityHttpBasicConfigurer -> {

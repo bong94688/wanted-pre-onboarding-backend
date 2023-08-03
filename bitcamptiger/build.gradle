@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+
 }
 
 group = 'com.example'
@@ -54,17 +55,11 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
     implementation 'org.modelmapper:modelmapper:3.1.1'
-
-//   바인딩게 됨
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
-
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-/// 컴파일될떄 실행되는 로직들
 // queryDSL 추가 : QueryDSL 빌드 옵션
 def querydslDir = 'src/main/generated'
 
@@ -81,4 +76,3 @@ configurations {
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
-

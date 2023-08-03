@@ -3,15 +3,19 @@ package com.example.wantedpreonboardingbackend.board.service;
 import com.example.wantedpreonboardingbackend.board.dto.BoardDto;
 import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.board.repository.BoardRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import nonapi.io.github.classgraph.utils.LogNode;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BoardService {
 
 
@@ -41,6 +45,26 @@ public class BoardService {
         return saveboBoard.getId();
     }
 
+    public int updateTodo(BoardDto boardDto){
+
+       Board board = boardRepository.findById(boardDto.getId()).orElseThrow(EntityNotFoundException::new);
+       Board updateboard = boardDto.creatBoard();
+       board = updateboard;
+
+    return boardDto.getId();
+    }
+
+
+    public int deleteboard(int boardnum){
+
+       Board board =  boardRepository.findById(boardnum).orElseThrow(EntityNotFoundException::new);
+
+       int deletenum = board.getId();
+        boardRepository.delete(board);
+
+
+        return deletenum;
+    }
 
 
 

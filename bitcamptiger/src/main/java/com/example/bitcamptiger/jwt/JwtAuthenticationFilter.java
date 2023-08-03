@@ -1,19 +1,15 @@
-package com.example.wantedpreonboardingbackend.jwt;
+package com.example.bitcamptiger.jwt;
 
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -27,17 +23,16 @@ import java.io.IOException;
 //자동실행되도록 설정
 
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final UserDetailsService userDetailsServiceImpl;
+
 
     private final JwtTokenProvider jwtTokenProvider;
 
-//    @Autowired
-//    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider){
-//        this.jwtTokenProvider = jwtTokenProvider;
-//    }
+    @Autowired
+    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider){
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     //   filter로 등록하면 자동으로 실행될 메소드
 
@@ -49,21 +44,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //       request에서 token꺼내오기
 //        token 값이 있으면 토큰값이 담기고 토큰 값이 없으면 null이 담긴다.
             String token = parseBearerToken(request);
+
 //       토큰 검사 및 시큐리티 등록
             if(token != null && !token.equalsIgnoreCase("null")){
 //           유효성 검사 및 username가져오기
                 String username = jwtTokenProvider.validateAndGetUsername(token);
-
-                UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
 //           유효성 검사 완료된 토큰 시큐리티에 인증된 사용자로 등록
-                System.out.println(userDetails);
-
                 AbstractAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,null, userDetails.getAuthorities());
+                        username,null,null);
+
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContext securityContext = SecurityContextHolder.getContext();
-                securityContext.setAuthentication(authenticationToken);
                 SecurityContextHolder.setContext(securityContext);
+
 
             }
         }catch (Exception e){
