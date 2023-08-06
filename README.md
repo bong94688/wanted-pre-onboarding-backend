@@ -39,3 +39,17 @@
 <h4> 게시판 기능 http://101.101.210.23:80/member/board
 
 <h5>게시판 리스트 조회</h5>
+<img src="./img/009.JPG" style="height:450px">
+
+<h5>게시판 생성</h5>
+<img src="./img/011.JPG" style="height:450px">
+
+<h5>게시판 업데이트</h5>
+<img src="./img/012.JPG" style="height:450px">
+
+<h5>게시판 삭제</h5>
+<img src="./img/013.JPG" style="height:450px">
+
+
+<h5>해당 게시판 조회</h5>
+<img src="./img/014.JPG" style="height:450px">
