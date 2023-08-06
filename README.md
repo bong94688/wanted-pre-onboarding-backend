@@ -15,6 +15,10 @@
 
 
 # 구현한 API의 동작을 촬영한 데모 영상 링크
+ ### [1부 데모 영상](https://youtu.be/vbyoT9wNVUQ)
+ ### [2부 데모 영상](https://youtu.be/MAM2nWUmTXI)
+
+
 
 # 구현 방법 및 이유에 대한 간략한 설명
 ### board 의 정보들을 restful하게 받고 CRUD기능을 만들고 jwt 을 이용해서 해당 사용자만 수정 삭제 가능하게 만들었습니다.
