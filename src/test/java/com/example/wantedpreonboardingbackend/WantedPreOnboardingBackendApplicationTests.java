@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 package com.example.wantedpreonboardingbackend;
 
 import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.board.entity.QBoard;
-import com.example.wantedpreonboardingbackend.member.entity.Member;
-import com.example.wantedpreonboardingbackend.member.entity.QMember;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class WantedPreOnboardingBackendApplicationTests {
 
-//   생성자 주입
+    //   생성자 주입
     @Autowired
     EntityManager entityManager;
 
@@ -45,18 +40,5 @@ class WantedPreOnboardingBackendApplicationTests {
         assertThat(memberJPAQuery.getId()).isEqualTo(test.getId());
 //        assertThat(memberJPAQuery.getId()).isEqualTo(test.getId());
 
-=======
-package com.example.bitcamptiger;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class BitcamptigerApplicationTests {
-
-    @Test
-    void contextLoads() {
->>>>>>> 365d2d9dcc418522926789802695e8665737de00
     }
-
 }

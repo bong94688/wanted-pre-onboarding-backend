@@ -55,7 +55,7 @@ public class BoardController {
 
     @GetMapping({"/board","/board/{page}"})
     public ResponseEntity<?> getTodoList(//security에 있는 authentication에 접근
-             @AuthenticationPrincipal CustomUserDetails customUserDetails,@RequestParam(value = "page", required = false) Integer page) {
+             @AuthenticationPrincipal CustomUserDetails customUserDetails,@PathVariable(value = "page", required = false) Integer page) {
         System.out.println(page);
         System.out.println(customUserDetails);
 
