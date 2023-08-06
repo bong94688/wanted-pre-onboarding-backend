@@ -68,3 +68,6 @@
 ### crud board
 
 <img src="./img/016.JPG" style="height:600px">
+
+<h2>간단한 아키텍쳐</h2>
+<img src="./img/017.JPG" style="height:300px">
