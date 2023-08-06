@@ -25,12 +25,12 @@
 
   ### [API 명세서](https://app.swaggerhub.com/apis/SIMBONGGYO_1/wanted-pre-onboarding-backend/1.0.0)
 
-<h4> 회원가입 http://101.101.210.23:80/member/join
+<h4> 회원가입 http://101.101.210.23:80/member/join </h4>
   <img src="./img/005.JPG" style="height:450px">
-</h4> 
+ 
    <img src="./img/006.JPG" style="height:450px">
    
-<h4> 로그인 http://101.101.210.23:80/member/login
+<h4> 로그인 http://101.101.210.23:80/member/login </h4>
 
 <img src="./img/007.JPG" style="height:450px">
 
