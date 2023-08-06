@@ -53,3 +53,14 @@
 
 <h5>해당 게시판 조회</h5>
 <img src="./img/014.JPG" style="height:450px">
+
+
+<h2>board crudTest코드작성</h2>
+
+### create board
+
+<img src="./img/015.JPG" style="height:450px">
+
+### crud board
+
+<img src="./img/016.JPG" style="height:600px">
