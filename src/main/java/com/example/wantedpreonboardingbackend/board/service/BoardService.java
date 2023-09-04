@@ -1,8 +1,10 @@
 package com.example.wantedpreonboardingbackend.board.service;
 
 import com.example.wantedpreonboardingbackend.board.dto.BoardDto;
+import com.example.wantedpreonboardingbackend.board.dto.PageInfoDTO;
 import com.example.wantedpreonboardingbackend.board.entity.Board;
 import com.example.wantedpreonboardingbackend.board.repository.BoardRepository;
+import com.example.wantedpreonboardingbackend.board.repository.PageRepository;
 import com.example.wantedpreonboardingbackend.member.entity.CustomUserDetails;
 import com.example.wantedpreonboardingbackend.member.entity.Member;
 import com.example.wantedpreonboardingbackend.member.reposiitory.MemberRepository;
@@ -26,6 +28,9 @@ public class BoardService {
 
 
     private final BoardRepository boardRepository;
+
+    private final PageRepository pageRepository;
+
 
     private final MemberRepository memberRepository;
     public List<BoardDto> getboardlist(){
@@ -118,4 +123,11 @@ public class BoardService {
 //        return BoardDto.of(board);
 //    }
 
+    public PageInfoDTO getPageInfo(int pageId) {
+        PageInfoDTO pageInfo = new PageInfoDTO();
+//        pageInfo.setPageTitle("페이지 제목"); // 페이지 제목 설정
+
+
+        return pageInfo;
+    }
 }

@@ -134,4 +134,16 @@ public class BoardController {
                 return ResponseEntity.badRequest().body(response);
             }
     }
+
+    @GetMapping("/boardsearch/{pagenum}")
+    public ResponseEntity<?> deleteboard(@PathVariable("pagenum") int num) {
+
+        ResponseDTO<BoardDto> response = new ResponseDTO<>();
+
+       return null;
+    }
+
+
+
+
 }
