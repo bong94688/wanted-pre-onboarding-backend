@@ -123,10 +123,11 @@ public class BoardService {
 //        return BoardDto.of(board);
 //    }
 
-    public PageInfoDTO getPageInfo(int pageId) {
+    public PageInfoDTO getPageInfo(Long pageId) {
         PageInfoDTO pageInfo = new PageInfoDTO();
 //        pageInfo.setPageTitle("페이지 제목"); // 페이지 제목 설정
 
+        pageRepository.getPageInfo(pageId);
 
         return pageInfo;
     }

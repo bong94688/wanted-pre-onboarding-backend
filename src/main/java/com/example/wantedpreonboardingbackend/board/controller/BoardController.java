@@ -136,10 +136,11 @@ public class BoardController {
     }
 
     @GetMapping("/boardsearch/{pagenum}")
-    public ResponseEntity<?> deleteboard(@PathVariable("pagenum") int num) {
+    public ResponseEntity<?> deleteboard(@PathVariable("pagenum") Long num) {
 
         ResponseDTO<BoardDto> response = new ResponseDTO<>();
 
+        boardService.getPageInfo(num);
        return null;
     }
 
